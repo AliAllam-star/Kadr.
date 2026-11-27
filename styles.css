@@ -7,3 +7,31 @@ a{color:inherit;text-decoration:none}img{display:block;max-width:100%}.section-w
 body.arabic .section-heading>p,body.arabic .hero-intro,body.arabic .shop-intro,body.arabic .service-row p,body.arabic .shop-card p{line-height:1.9}
 body.arabic .shop-card-bottom,.arabic .template-details{direction:rtl}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+
+
+/* Pricing cards — refined studio package layout */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch}
+.price-card{position:relative;display:flex;flex-direction:column;min-width:0;min-height:100%;padding:28px 25px 25px;background:linear-gradient(155deg,#20231c 0%,#171a15 72%);border:1px solid rgba(240,241,230,.13);border-radius:5px;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s}
+.price-card:hover{transform:translateY(-7px);border-color:rgba(198,243,107,.48);box-shadow:0 22px 55px #0005}
+.price-card.featured{border-color:rgba(198,243,107,.72);background:linear-gradient(155deg,#293020 0%,#1a1d17 75%);box-shadow:0 18px 50px #0003}
+.price-card.featured:before{content:"";position:absolute;inset:0 0 auto;height:2px;background:var(--accent)}
+.price-card-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:27px}
+.price-label{font-size:9px;letter-spacing:.15em;font-weight:700;color:var(--accent)}
+.price-icon{display:grid;place-items:center;width:30px;height:30px;border:1px solid var(--line);border-radius:50%;color:var(--accent);font-size:14px}
+.price-badge{padding:6px 9px;background:var(--accent);color:#171a12;font-size:8px;font-weight:800;letter-spacing:.1em}
+.price-card h3{font:600 24px var(--display);letter-spacing:-.04em;margin:0 0 13px}
+.price-card .price{font:700 clamp(27px,3vw,36px) var(--display);letter-spacing:-.055em;color:var(--text);margin-bottom:13px}
+.price-card .price small{font:500 10px var(--font);letter-spacing:0;color:var(--muted)}
+.price-card .price-custom{font-size:clamp(22px,2.5vw,29px);color:var(--accent);letter-spacing:-.035em}
+.price-card>p{font-size:12px;line-height:1.8;color:#a1a598;min-height:66px;margin:0 0 19px}
+.price-features{list-style:none;padding:17px 0 20px;margin:0 0 22px;border-top:1px solid var(--line);display:grid;gap:11px}
+.price-features li{position:relative;padding-inline-start:22px;color:#d0d2c8;font-size:11px;line-height:1.55}
+.price-features li:before{content:"✓";position:absolute;inset-inline-start:0;color:var(--accent);font-weight:700}
+.price-link{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:auto;padding:13px 15px;border:1px solid #55594d;color:var(--text);font-size:11px;font-weight:700;transition:.25s}
+.price-link:hover,.price-card.featured .price-link{background:var(--accent);border-color:var(--accent);color:#171a12}
+.pricing-foot{max-width:850px;line-height:1.8;margin-top:25px}
+body.arabic .price-card h3{font-family:'Cairo',sans-serif;letter-spacing:0}
+body.arabic .price-label{letter-spacing:0}
+body.arabic .price-card>p,body.arabic .price-features li{line-height:1.9}
+@media(max-width:900px){.pricing-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.price-card:last-child{grid-column:1/-1}}
+@media(max-width:650px){.pricing-grid{grid-template-columns:1fr}.price-card:last-child{grid-column:auto}.price-card{padding:25px 21px}.price-card>p{min-height:0}.price-card h3{font-size:22px}}
