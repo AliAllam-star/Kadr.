@@ -1,20 +1,53 @@
-const menuButton = document.querySelector('.menu-toggle');
-const nav = document.querySelector('.nav');
-menuButton?.addEventListener('click', () => {
-  const isOpen = nav.classList.toggle('open');
-  menuButton.setAttribute('aria-expanded', String(isOpen));
-});
-nav?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
-  nav.classList.remove('open');
-  menuButton?.setAttribute('aria-expanded', 'false');
-}));
-document.getElementById('year').textContent = new Date().getFullYear();
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+const menuButton=document.querySelector('.menu-toggle');
+const nav=document.querySelector('.nav');
+menuButton?.addEventListener('click',()=>{const open=nav.classList.toggle('open');menuButton.setAttribute('aria-expanded',String(open));});
+nav?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menuButton?.setAttribute('aria-expanded','false');}));
+const year=document.getElementById('year'); if(year) year.textContent=new Date().getFullYear();
+
+const translations={
+en:{
+announcement:'Independent digital studio · Cairo, Egypt',availability:'Available for select projects ↗',navWork:'Work',navServices:'Services',navTemplates:'Templates',navPricing:'Pricing',navStudio:'Studio',navContact:'Start a project ↗',
+eyebrow:'Strategy · Design · Development',heroTitle:'Digital experiences<br>that <span class="outline-word">move</span><br><span class="accent-word">business forward.</span>',heroText:'We design and build distinctive websites and ready-to-use templates for ambitious businesses across industries.',heroCta:'Let’s build something ↗',heroSecondary:'Explore templates ↓',proofStrong:'One studio. Many industries.',proofText:'Custom websites and flexible templates.',noteTitle:'Built around your goals',noteText:'Not locked to one industry.',scroll:'SCROLL TO EXPLORE',tagline:'DESIGN THAT DOES MORE.',
+workEyebrow:'Selected directions',workTitle:'Different industries.<br><span class="muted">One thoughtful approach.</span>',workText:'From professional services to hospitality and technology, we build digital experiences around what each business needs.',industry1:'Spaces that sell a vision.',industry2:'Experiences worth booking.',industry3:'Ideas made clear.',workNote:'Portfolio examples and concepts are clearly identified before publication.',
+servicesEyebrow:'What we do',servicesTitle:'From a blank page<br><span class="muted">to a confident launch.</span>',servicesText:'Choose a custom build shaped around your business, or start faster with a ready-made template.',service1Title:'Custom website design',service1Text:'A distinctive website planned around your audience, offer and business goals.',service2Title:'Website development',service2Text:'Responsive, fast and maintainable websites built with care.',service3Title:'Arabic & English websites',service3Text:'Bilingual experiences with proper RTL layouts and natural reading flow.',service4Title:'Premium templates',service4Text:'Editable HTML, CSS and JavaScript starting points for developers and businesses.',
+shopEyebrow:'The template shop',shopTitle:'A head start<br><span class="muted">for your next project.</span>',allTemplates:'Browse all 6 templates ↗',shopFoot:'Six launch categories in the shop. More designs can be added as the collection grows.',
+pricingEyebrow:'Straightforward starting points',pricingTitle:'Clear options.<br><span class="muted">No mystery pricing.</span>',pricingText:'Starting prices help you plan. Final quotes depend on scope, content and functionality.',price1Label:'TEMPLATE',price1Title:'Ready-made',oneTime:'/ one-time',price1Text:'A polished HTML template to customize for your project.',price1Cta:'Explore templates ↗',price2Label:'CUSTOM WEBSITE',starting:'/ starting from',price2Text:'A focused website for a small business, with up to 5 pages.',price2Cta:'Discuss a project ↗',price3Label:'GROWTH',price3Text:'A larger website with up to 10 pages and expanded functionality.',price3Cta:'Discuss a project ↗',pricingFoot:'Optional ongoing care starts at $40/month. Scope and availability are confirmed before any commitment.',
+studioEyebrow:'The studio',studioTitle:'Independent by nature.<br><span class="accent-word">Curious by design.</span>',studioLead:'Kadr Studio creates digital foundations for businesses across different industries.',studioText:'We believe good websites should feel considered, work beautifully and make the next step obvious. No one-size-fits-all thinking — just thoughtful design and practical development.',fact1:'Direct collaboration',fact2:'Design with intention',fact3:'Built for real use',contactEyebrow:'Have a project in mind?',contactTitle:'Let’s make<br><span class="accent-word">it happen.</span>',contactText:'Tell us what you’re building, and what you need it to do.<br>We’ll take it from there.',contactCta:'Start a conversation ↗',footerText:'Thoughtful websites.<br>Built to move you forward.',backTop:'BACK TO TOP ↑',
+backStudio:'Back to studio ↗',catalogTitle:'Find the right<br><span class="accent-word">starting point.</span>',catalogIntro:'Browse responsive website templates for different industries. Search, filter and choose a design that fits your next project.',searchPlaceholder:'Search templates...',allCategories:'All categories',sortFeatured:'Featured',sortPrice:'Price: low to high',sortName:'Name: A–Z',allPrices:'All prices in USD',available:'Available',detailsBuy:'Details & purchase ↗',dentalDesc:'A polished digital home for dental clinics and healthcare practices.',estateDesc:'A refined property website for agencies, listings and developments.',nexaDesc:'A clear, conversion-focused landing page for software products.',gatherDesc:'A warm, inviting website for restaurants, cafés and food brands.',counselDesc:'A confident, credible online presence for law firms and consultants.',atelierDesc:'A visual portfolio for architecture and interior design studios.',noResults:'No templates match your search. Try another keyword or category.',needCustom:'Need something custom?',customTitle:'Let’s build around<br><span class="accent-word">your business.</span>',customCta:'Start a project ↗'
+},
+ar:{
+announcement:'استوديو رقمي مستقل · القاهرة، مصر',availability:'متاح لمشروعات مختارة ↗',navWork:'أعمالنا',navServices:'خدماتنا',navTemplates:'القوالب',navPricing:'الأسعار',navStudio:'عن الاستوديو',navContact:'ابدأ مشروعك ↗',
+eyebrow:'استراتيجية · تصميم · تطوير',heroTitle:'تجارب رقمية<br>تحرّك <span class="outline-word">أعمالك</span><br><span class="accent-word">للأمام.</span>',heroText:'نصمم ونطوّر مواقع مميزة وقوالب جاهزة للشركات الطموحة في مختلف المجالات.',heroCta:'لنبدأ بناء موقعك ↗',heroSecondary:'استكشف القوالب ↓',proofStrong:'استوديو واحد. مجالات متعددة.',proofText:'مواقع مخصصة وقوالب مرنة.',noteTitle:'مصمم لتحقيق أهدافك',noteText:'لسنا متخصصين في مجال واحد.',scroll:'اكتشف المزيد',tagline:'تصميم يصنع فرقًا.',
+workEyebrow:'مجالات نعمل معها',workTitle:'مجالات مختلفة.<br><span class="muted">وفكر واحد يهتم بالتفاصيل.</span>',workText:'من الخدمات المهنية إلى المطاعم والتكنولوجيا، نصمم تجارب رقمية تناسب احتياجات كل نشاط.',industry1:'مساحات تعرض رؤيتك.',industry2:'تجارب تستحق الحجز.',industry3:'أفكار نقدمها بوضوح.',workNote:'يتم توضيح الأعمال التجريبية والمشروعات الفعلية بشفافية.',
+servicesEyebrow:'ماذا نقدم',servicesTitle:'من الفكرة الأولى<br><span class="muted">إلى إطلاق واثق.</span>',servicesText:'اختر موقعًا مخصصًا لنشاطك، أو ابدأ أسرع باستخدام قالب جاهز.',service1Title:'تصميم مواقع مخصصة',service1Text:'موقع مميز مبني حول جمهورك وخدماتك وأهداف نشاطك.',service2Title:'تطوير المواقع',service2Text:'مواقع سريعة ومتجاوبة وسهلة الصيانة.',service3Title:'مواقع بالعربية والإنجليزية',service3Text:'تجربة ثنائية اللغة مع دعم RTL واتجاه عربي مضبوط.',service4Title:'قوالب مواقع احترافية',service4Text:'قوالب HTML وCSS وJavaScript قابلة للتعديل للمطورين وأصحاب الأعمال.',
+shopEyebrow:'متجر القوالب',shopTitle:'ابدأ مشروعك<br><span class="muted">بخطوة أسرع.</span>',allTemplates:'تصفح القوالب الستة ↗',shopFoot:'ستة قوالب عند الإطلاق، ويمكن توسيع المجموعة وإضافة المزيد باستمرار.',
+pricingEyebrow:'أسعار بداية واضحة',pricingTitle:'اختيارات واضحة.<br><span class="muted">بدون أسعار مخفية.</span>',pricingText:'الأسعار المبدئية تساعدك على التخطيط. السعر النهائي يتحدد حسب حجم ومتطلبات المشروع.',price1Label:'قالب جاهز',price1Title:'قالب موقع',oneTime:'/ دفعة واحدة',price1Text:'قالب HTML احترافي قابل للتخصيص لمشروعك.',price1Cta:'استكشف القوالب ↗',price2Label:'موقع مخصص',starting:'/ يبدأ من',price2Text:'موقع لنشاط صغير يصل إلى 5 صفحات.',price2Cta:'ناقش مشروعك ↗',price3Label:'باقة النمو',price3Text:'موقع أكبر يصل إلى 10 صفحات مع وظائف إضافية.',price3Cta:'ناقش مشروعك ↗',pricingFoot:'تبدأ خدمة العناية الشهرية الاختيارية من 40 دولارًا. يتم تأكيد النطاق والتوافر قبل الاتفاق.',
+studioEyebrow:'عن الاستوديو',studioTitle:'مستقلون بطبيعتنا.<br><span class="accent-word">فضوليون في تصميمنا.</span>',studioLead:'Kadr Studio يبني أساسًا رقميًا للشركات في مختلف المجالات.',studioText:'نؤمن أن الموقع الجيد يجب أن يكون مدروسًا وسهل الاستخدام ويوجه الزائر إلى الخطوة التالية. لا نستخدم حلًا واحدًا للجميع؛ بل تصميمًا واعيًا وتطويرًا عمليًا.',fact1:'تواصل مباشر',fact2:'تصميم له هدف',fact3:'مبني للاستخدام الحقيقي',contactEyebrow:'هل لديك مشروع؟',contactTitle:'لنحوّل<br><span class="accent-word">الفكرة لواقع.</span>',contactText:'أخبرنا عما تريد بناءه وما الذي تحتاج أن يحققه.<br>وسنساعدك في الخطوة التالية.',contactCta:'ابدأ المحادثة ↗',footerText:'مواقع مدروسة.<br>تدفع أعمالك للأمام.',backTop:'العودة للأعلى ↑',
+backStudio:'العودة للاستوديو ↗',catalogTitle:'اعثر على القالب<br><span class="accent-word">المناسب لمشروعك.</span>',catalogIntro:'تصفح قوالب مواقع متجاوبة لمجالات مختلفة. ابحث وصفِّ النتائج واختر التصميم المناسب لمشروعك.',searchPlaceholder:'ابحث عن قالب...',allCategories:'كل المجالات',sortFeatured:'المميزة',sortPrice:'السعر: من الأقل',sortName:'الاسم: أ–ي',allPrices:'كل الأسعار بالدولار',available:'متاح',detailsBuy:'التفاصيل والشراء ↗',dentalDesc:'موقع احترافي لعيادات الأسنان ومراكز الرعاية الصحية.',estateDesc:'موقع عقاري أنيق للشركات والوحدات والمشروعات العقارية.',nexaDesc:'صفحة تسويقية واضحة للبرمجيات والمنتجات التقنية.',gatherDesc:'موقع جذاب للمطاعم والكافيهات والعلامات الغذائية.',counselDesc:'حضور رقمي موثوق لمكاتب المحاماة والاستشارات.',atelierDesc:'معرض أعمال بصري لمكاتب العمارة والتصميم الداخلي.',noResults:'لا توجد قوالب تطابق بحثك. جرّب كلمة أو مجالًا آخر.',needCustom:'تحتاج تصميمًا مخصصًا؟',customTitle:'لنبنِ موقعًا يناسب<br><span class="accent-word">نشاطك التجاري.</span>',customCta:'ابدأ مشروعك ↗'
+}
+};
+function setLanguage(lang){
+ const dict=translations[lang]||translations.en;
+ document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+ document.body.classList.toggle('arabic',lang==='ar');
+ document.querySelectorAll('[data-i18n]').forEach(el=>{const key=el.dataset.i18n;if(dict[key]!==undefined)el.innerHTML=dict[key];});
+ document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{const key=el.dataset.i18nPlaceholder;if(dict[key])el.placeholder=dict[key];});
+ const toggle=document.getElementById('langToggle');if(toggle)toggle.textContent=lang==='ar'?'English':'العربية';
+ try{localStorage.setItem('kadr-language',lang)}catch(e){}
+}
+let currentLang='en';try{currentLang=localStorage.getItem('kadr-language')||'en'}catch(e){}
+setLanguage(currentLang);
+document.getElementById('langToggle')?.addEventListener('click',()=>setLanguage(currentLang=document.documentElement.lang==='en'?'ar':'en'));
+
+const search=document.getElementById('templateSearch'),category=document.getElementById('categoryFilter'),sort=document.getElementById('sortFilter'),grid=document.getElementById('shopGrid');
+if(grid){
+ const cards=[...grid.querySelectorAll('.shop-card')],count=document.getElementById('resultsCount'),empty=document.getElementById('noResults');
+ function update(){
+  const q=(search?.value||'').trim().toLowerCase(),cat=category?.value||'all';
+  let visible=cards.filter(card=>(cat==='all'||card.dataset.category===cat)&&(`${card.dataset.name} ${card.dataset.keywords} ${card.dataset.category}`).toLowerCase().includes(q));
+  const mode=sort?.value||'featured';if(mode==='price-low')visible.sort((a,b)=>Number(a.dataset.price)-Number(b.dataset.price));if(mode==='name')visible.sort((a,b)=>a.dataset.name.localeCompare(b.dataset.name));
+  cards.forEach(c=>c.hidden=!visible.includes(c));visible.forEach(c=>grid.appendChild(c));
+  if(count)count.textContent=`${visible.length} ${document.documentElement.lang==='ar'?'قوالب':'templates'}`;if(empty)empty.hidden=visible.length!==0;
+ }
+ [search,category,sort].forEach(el=>el?.addEventListener('input',update));[category,sort].forEach(el=>el?.addEventListener('change',update));update();
+}

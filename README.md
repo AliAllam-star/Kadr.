@@ -1,19 +1,21 @@
-# Kadr Studio redesign
+# Kadr Studio — Version 2
 
-A responsive static website built with HTML, CSS and vanilla JavaScript.
+A responsive bilingual (English/Arabic) static website built with HTML, CSS and vanilla JavaScript.
 
 ## Files
-- `index.html` — main studio landing page
-- `templates.html` — template shop page
-- `styles.css` — shared responsive styling
-- `script.js` — mobile navigation, reveal-on-scroll, dynamic year
+- `index.html` — studio homepage, industries, services and pricing
+- `templates.html` — six-template catalog with live search, category filters and sorting
+- `styles.css` — responsive dark/lime design with RTL support
+- `script.js` — mobile navigation, bilingual switch, catalog filtering and language preference
 
-## Before publishing
-1. Replace the WhatsApp placeholder `201000000000` with the studio's real business number.
-2. Replace the Gumroad placeholder URL with the actual product checkout URL.
-3. Add real project screenshots and update the portfolio descriptions.
-4. Only publish packages, prices, delivery times and services you can actually provide.
-5. The current photography is loaded from Unsplash URLs and requires an internet connection.
-6. Add a privacy policy if you later collect visitor information through a contact form.
+## Deploy to Netlify
+1. Extract this ZIP.
+2. Open Netlify Drop and upload the **whole extracted folder**, not a single HTML file.
+3. `index.html` is the homepage and should be at the root of the uploaded folder.
 
-Open `index.html` locally to preview the site.
+## Important before taking payments
+- Prices are displayed as proposed starting prices and should be confirmed before launch.
+- Template purchase links currently open an email inquiry. Replace them with real checkout URLs once your payment provider is set up.
+- Replace `hello@kadr.studio` with your actual contact email if needed.
+- Replace stock photography and concept work with real portfolio images before presenting them as completed client projects.
+- This is a static HTML/CSS/JS site. No build command is required.
