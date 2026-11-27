@@ -19,3 +19,7 @@ A responsive bilingual (English/Arabic) static website built with HTML, CSS and 
 - Replace `hello@kadr.studio` with your actual contact email if needed.
 - Replace stock photography and concept work with real portfolio images before presenting them as completed client projects.
 - This is a static HTML/CSS/JS site. No build command is required.
+
+
+## Service scope
+Kadr Studio currently offers frontend-only work using HTML, CSS and vanilla JavaScript: informational business/portfolio websites, landing pages, bilingual frontend pages, and static templates. It does not offer custom backend development, databases, user authentication, payment processing, SaaS platforms, booking engines, or admin dashboards. Confirm every project's requirements before accepting it.
